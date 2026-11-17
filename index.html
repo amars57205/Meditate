@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استمارة التأمل الذاتي للمعلمة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-teal: #3b82f6;
+            --primary-dark: #1e3a8a;
+            --primary-light: #eff6ff;
+            --bg-page: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 15px 10px 40px;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .form-header {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border-top: 6px solid var(--primary-teal);
+            padding: 22px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .admin-info {
+            display: flex;
+            justify-content: space-between;
+            background: var(--primary-light);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 0.92rem;
+            border: 1px solid #dbeafe;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .required-note {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 12px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .section-banner {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: #ffffff;
+            padding: 12px 18px;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-top: 20px;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
+        }
+
+        .section-body {
+            background: var(--card-bg);
+            border-radius: 0 0 16px 16px;
+            padding: 18px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-top: none;
+        }
+
+        .standalone-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .question-block {
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .question-block:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .question-title {
+            display: block;
+            font-size: 0.98rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .req {
+            color: var(--danger);
+            margin-right: 4px;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 0.92rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #fdfdfd;
+            color: var(--text-main);
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 85px;
+        }
+
+        .options-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 10px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            text-align: center;
+            white-space: nowrap;
+            color: #475569;
+        }
+
+        .option-label:hover {
+            border-color: var(--primary-teal);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .option-label input[type="radio"] {
+            accent-color: var(--primary-teal);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .option-label:has(input[type="radio"]:checked) {
+            border-color: var(--primary-teal);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            box-shadow: 0 1px 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-submit {
+            background: var(--primary-teal);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex: 1;
+            min-width: 160px;
+            box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-submit:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-print {
+            background: #ffffff;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary-teal);
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-print:hover {
+            background: var(--primary-light);
+        }
+
+        .result-box {
+            display: none;
+            background: #ffffff;
+            border-radius: 16px;
+            border-right: 6px solid var(--primary-teal);
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border-top: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-box h3 {
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 8px 5px 30px;
+            }
+            .form-header {
+                padding: 15px 12px;
+            }
+            .form-header h1 {
+                font-size: 1.3rem;
+            }
+            .admin-info {
+                flex-direction: column;
+                gap: 6px;
+                font-size: 0.88rem;
+                padding: 10px;
+            }
+            .input-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .standalone-card, .section-body {
+                padding: 12px;
+            }
+            .options-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .option-label {
+                font-size: 0.82rem;
+                padding: 8px 4px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .actions, .btn-print, .btn-submit {
+                display: none !important;
+            }
+            .section-banner {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-header">
+        <h1>استمارة التأمل الذاتي</h1>
+        <div class="admin-info">
+            <span>مديرة المدرسة / هند المديني</span>
+            <span>وكيلة شؤون المعلمات / ريما السعدون</span>
+        </div>
+        <div class="required-note">* يشير إلى أن السؤال مطلوب</div>
+    </div>
+
+    <form id="selfReflectionForm">
+        <!-- البيانات الأساسية -->
+        <div class="standalone-card">
+            <div class="input-grid">
+                <div>
+                    <label class="question-title" for="teacherName">اسم المعلمة <span class="req">*</span></label>
+                    <input type="text" id="teacherName" name="teacherName" required placeholder="أدخلي الاسم الثلاثي">
+                </div>
+                <div>
+                    <label class="question-title" for="specialty">التخصص <span class="req">*</span></label>
+                    <input type="text" id="specialty" name="specialty" required placeholder="مثال: لغة عربية / رياضيات">
+                </div>
+            </div>
+        </div>
+
+        <!-- الأقسام والأسئلة -->
+        <div id="dynamicQuestionsContainer"></div>
+
+        <!-- التأمل الذاتي وخطة التحسين -->
+        <div class="section-banner">التأمل الذاتي وخطة التحسين</div>
+        <div class="section-body">
+            <div class="question-block">
+                <label class="question-title" for="needImprovement">الأمور التي أحتاج لتطويرها <span class="req">*</span></label>
+                <textarea id="needImprovement" name="needImprovement" required placeholder="اكتبي هنا الجوانب التي ترين أنها بحاجة إلى تحسين أو تطوير..."></textarea>
+            </div>
+            <div class="question-block">
+                <label class="question-title" for="strengths">أبرز نقاط القوة لدي <span class="req">*</span></label>
+                <textarea id="strengths" name="strengths" required placeholder="اكتبي هنا أبرز مهاراتك ونقاط التميز في أدائك التدريسي..."></textarea>
+            </div>
+            <div class="question-block">
+                <label class="question-title" for="improvementPlan">خطتي للتحسين <span class="req">*</span></label>
+                <textarea id="improvementPlan" name="improvementPlan" required placeholder="اكتبي الخطوات العملية والزمنية لتنفيذ خطة التحسين..."></textarea>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button type="submit" id="submitBtn" class="btn-submit">إرسال</button>
+            <button type="button" class="btn-print" onclick="window.print()">🖨️ طباعة / حفظ PDF</button>
+        </div>
+    </form>
+
+    <div class="result-box" id="resultBox">
+        <h3>✅ تم الإرسال بنجاح</h3>
+        <p id="resultTeacherInfo"></p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 6px;">تم حفظ جميع البيانات والإجابات في قاعدة البيانات بنجاح.</p>
+    </div>
+
+    <footer>
+        إعداد وبرمجة: أ. صلاح سعد الرحيمان
+    </footer>
+</div>
+
+<script>
+    // تم وضع رابط الويب الخاص بك وربطه مباشرة بالجدول
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxZiUKrK6yUYKm1aFQzhG-lv5xoE0xPrsnmKb_Jj1Gzqv7DtjLAnlZRyc-vWwqxqkAsQ/exec";
+
+    const sectionsData = [
+        {
+            title: "التخطيط والتحضير",
+            questions: [
+                "أُعدّ دروسي بشكل منظم ومنسق",
+                "أُحدد أهداف التعلم بوضوح للطالبات",
+                "أُراعي الفروق الفردية عند إعداد الدروس"
+            ]
+        },
+        {
+            title: "تنفيذ الدرس واستراتيجيات التدريس",
+            questions: [
+                "أبدأ الدرس بتمهيد يجذب انتباه الطالبات",
+                "أستخدم أساليب متنوعة (مناقشة - عمل جماعي - تجارب..)",
+                "أطرح أسئلة تحفز التفكير النقدي والإبداعي",
+                "أستخدم وسائل وتقنيات تعليمية حديثة (عروض - منصات - تطبيقات)"
+            ]
+        },
+        {
+            title: "إدارة الصف والبيئة التعليمية",
+            questions: [
+                "أوفر بيئة صفية مشجعة وآمنة للتعلم",
+                "أضع قواعد واضحة وتُطبق بعدالة",
+                "أدير وقت الحصة بكفاءة",
+                "أتعامل مع المواقف الصفية بهدوء وحزم"
+            ]
+        },
+        {
+            title: "التقويم ومتابعة الطالبات",
+            questions: [
+                "أوظف أدوات متنوعة لتعلم الطالبات",
+                "أتابع تقدم الطالبات وأحدد نقاط القوة والضعف",
+                "أقدم تغذية راجعة بنّاءة تساعد على التحسين"
+            ]
+        },
+        {
+            title: "التطوير المهني والعلاقات التربوية",
+            questions: [
+                "أحرص على تطوير ذاتي بالمشاركة في الدورات والورش",
+                "أستفيد من زميلاتي والمصادر التعليمية الحديثة",
+                "أبني علاقة تبادل محترم مع الطالبات",
+                "أشجع الطالبات على المشاركة وتحمل المسؤولية",
+                "أتواصل بفاعلية مع أولياء الأمور عند الحاجة"
+            ]
+        }
+    ];
+
+    const optionsList = ["ممتاز", "جيد جداً", "جيد", "مقبول"];
+
+    const container = document.getElementById("dynamicQuestionsContainer");
+    let qIndex = 1;
+
+    sectionsData.forEach(section => {
+        const banner = document.createElement("div");
+        banner.className = "section-banner";
+        banner.textContent = section.title;
+        container.appendChild(banner);
+
+        const body = document.createElement("div");
+        body.className = "section-body";
+
+        section.questions.forEach(qText => {
+            const qBlock = document.createElement("div");
+            qBlock.className = "question-block";
+
+            const title = document.createElement("span");
+            title.className = "question-title";
+            title.innerHTML = `${qIndex}. ${qText} <span class="req">*</span>`;
+            qBlock.appendChild(title);
+
+            const optionsRow = document.createElement("div");
+            optionsRow.className = "options-row";
+
+            optionsList.forEach(opt => {
+                const label = document.createElement("label");
+                label.className = "option-label";
+
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = `q_${qIndex}`;
+                radio.value = opt;
+                radio.required = true;
+
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(opt));
+                optionsRow.appendChild(label);
+            });
+
+            qBlock.appendChild(optionsRow);
+            body.appendChild(qBlock);
+            qIndex++;
+        });
+
+        container.appendChild(body);
+    });
+
+    document.getElementById("selfReflectionForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "جاري الإرسال والحفظ...";
+
+        const formDataObj = {
+            teacherName: document.getElementById("teacherName").value.trim(),
+            specialty: document.getElementById("specialty").value.trim(),
+            needImprovement: document.getElementById("needImprovement").value.trim(),
+            strengths: document.getElementById("strengths").value.trim(),
+            improvementPlan: document.getElementById("improvementPlan").value.trim()
+        };
+
+        const totalQuestions = qIndex - 1;
+        for (let i = 1; i <= totalQuestions; i++) {
+            const selected = document.querySelector(`input[name="q_${i}"]:checked`);
+            formDataObj[`q_${i}`] = selected ? selected.value : "";
+        }
+
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formDataObj)
+        })
+        .then(() => {
+            document.getElementById("resultTeacherInfo").innerHTML = `<strong>المعلمة:</strong> ${formDataObj.teacherName} &nbsp;|&nbsp; <strong>التخصص:</strong> ${formDataObj.specialty}`;
+            const resultBox = document.getElementById("resultBox");
+            resultBox.style.display = "block";
+            resultBox.scrollIntoView({ behavior: "smooth" });
+            
+            submitBtn.textContent = "تم الإرسال";
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "إرسال";
+        });
+    });
+</script>
+
+</body>
+</html>
